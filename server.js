@@ -3,6 +3,8 @@
 var express    = require("express");
 var bodyParser = require("body-parser");
 var mysql = require('mysql');
+
+
 var connection = mysql.createConnection({
     host    : 'localhost',
     user    : 'root',
@@ -16,16 +18,9 @@ connection.connect(function(err) {
     return;
   }
 
-  console.log('connected as id ' + connection.threadId);
+  console.log('connected to SQL as id ' + connection.threadId);
 });
 
-connection.end();
-
-// The server currently uses an in memory
-// data store. You must implement the required
-// functionality in ./lib/storage.js and
-// switch out this variable.
-//ar Storage = require('./lib/MongoDB');
 
 var app = express();
 
@@ -35,6 +30,18 @@ app.use(bodyParser.json());
 
 // server static files from the public/ directory.
 app.use(express.static('public'));
+
+
+app.post("/register", function (req,res){
+  console.log("POST request to: /register");
+  var info = req.body;
+  console.log(info);
+  var test = {username: 'nodetest',email: 'node@node.com',password: 'pass', date_registered : 'NOW()'};
+  var query = connection.query('SELECT * from accounts', function(err, result){
+    console.log(err);
+  });
+  console.log(query.sql);
+});
 
 
 
