@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/Rafasdc/CSC370_Project#readme",
   "dependencies": {
-    "bootstrap": "^3.3.6"
+    "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.6",
+    "express": "^4.14.0",
+    "mysql": "^2.11.1"
   }
 }
