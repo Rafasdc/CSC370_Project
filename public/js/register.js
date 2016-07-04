@@ -1,25 +1,20 @@
 $(document).ready(function(){
 
 	$('.form-register').submit(function(){
-		console.log("button clicked");
+		console.log("form submitted");
 
-		var info = {
-			username : $('#inputUsername').val(),
-			email : $('#inputEmail').val(),
-			password : $('#inputPassword').val()
-		};
+		var info = 	{username: $('#inputUsername').val(), email: $('#inputEmail').val(),password: $('#inputPassword').val()};
 
-		console.log(info);
+		alert(JSON.stringify(info));
 
 		$.ajax({
-			type: 'POST',
 			url: '/register',
-			data: info,
+			type: 'POST',
+			contentType: "application/json",
+			data: JSON.stringify(info),
 			success: function(){
+				alert(info);
 				console.log("worked");
-			},
-			error: function(){
-				alert('error');
 			}
 		});
 	});

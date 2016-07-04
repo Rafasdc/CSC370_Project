@@ -37,11 +37,21 @@ app.post("/register", function (req,res){
   var info = req.body;
   console.log(info);
   var test = {username: 'nodetest',email: 'node@node.com',password: 'pass', date_registered : 'NOW()'};
-  var query = connection.query('SELECT * from accounts', function(err, result){
-    console.log(err);
+  var query = connection.query('INSERT INTO accounts SET ?',info, function(err, result){
+    if (err){
+      console.log(err);
+    } else {
+      console.log(result);
+    }
   });
   console.log(query.sql);
 });
+
+app.post("/login", function (req,res){
+  console.log("POST Request to :/login");
+});
+
+app.post("")
 
 
 
