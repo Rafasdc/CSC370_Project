@@ -1,7 +1,9 @@
 var posts;
 $(document).ready(function(){
 
-	
+	$.get("/content",function(data,status){
+		console.log(status);
+	});
 
 	$.get("/gettop", function(data,status){
 		console.log(data);

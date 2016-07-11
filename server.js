@@ -24,6 +24,16 @@ connection.connect(function(err) {
 
 var app = express();
 
+var auth = function(req,res,next) {
+  res.statusCode = 401;
+  res.setHeader('WWW-Authenticate');
+  res.send('Unauthorized');
+};
+
+app.get("/content",auth,function(req,res){
+  res.send("See only after login!");
+});
+
 
 // use the parse to get JSON objects out of the request.
 app.use(bodyParser.json());
