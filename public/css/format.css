@@ -7,6 +7,10 @@ body {
   margin-bottom: 20px;
 }
 
+.list-group {
+  margin: 20px;
+}
+
 .form-register {
   max-width: 330px;
   padding: 15px;
@@ -31,7 +35,7 @@ body {
 .form-register .form-control:focus {
   z-index: 2;
 }
-.form-register input[type="email"] {
+.form-register input[type="user"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;

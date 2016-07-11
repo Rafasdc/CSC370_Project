@@ -51,7 +51,19 @@ app.post("/login", function (req,res){
   console.log("POST Request to :/login");
 });
 
-app.post("")
+app.get("/gettop", function(req,res){
+  console.log("GET Request to :/gettop");
+  var response;
+  var query = connection.query('SELECT title FROM posts', function(error,results,fields){
+    if (error){
+      console.log(err);
+    } else {
+      console.log(results);
+      res.json(results);
+    }
+  })
+  //res.json("rafa");
+});
 
 
 
