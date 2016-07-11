@@ -24,9 +24,17 @@ connection.connect(function(err) {
 
 var app = express();
 
+
+var users;
 var auth = function(req,res,next) {
-  res.statusCode = 401;
-  res.setHeader('WWW-Authenticate');
+  var query = connection.query("SELECT username FROM accounts WHERE username='bob'", function(error,results,fields){
+    if(error){
+      console.log(error);
+    } else {
+      console.log("Results are" + results);
+    }
+  })
+  console.log(users.length);
   res.send('Unauthorized');
 };
 
@@ -51,7 +59,7 @@ app.post("/register", function (req,res){
     if (err){
       console.log(err);
     } else {
-      console.log(result);
+      //console.log(result);
     }
   });
   console.log(query.sql);
@@ -64,15 +72,15 @@ app.post("/login", function (req,res){
 app.get("/gettop", function(req,res){
   console.log("GET Request to :/gettop");
   var response;
-  var query = connection.query('SELECT title FROM posts', function(error,results,fields){
+  var query = connection.query('SELECT title,rating FROM posts,post_ratings WHERE rating > 0', function(error,results,fields){ 
+  //TODO: change value of 0 to what we consider top AND add sort by descending
     if (error){
-      console.log(err);
+      console.log(error);
     } else {
-      console.log(results);
+      //console.log(results);
       res.json(results);
     }
   })
-  //res.json("rafa");
 });
 
 
