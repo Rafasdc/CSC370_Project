@@ -3,6 +3,7 @@
 var express    = require("express");
 var bodyParser = require("body-parser");
 var mysql = require('mysql');
+var session = require('express-session');
 
 
 var connection = mysql.createConnection({
@@ -17,38 +18,62 @@ connection.connect(function(err) {
     console.error('error connecting: ' + err.stack);
     return;
   }
-
   console.log('connected to SQL as id ' + connection.threadId);
 });
 
 
 var app = express();
+app.use(session({
+  secret:'pr0jec7_csc3702016',
+  resave: true,
+  saveUnintialized: true
+}))
 
-
-var users;
+/*
 var auth = function(req,res,next) {
-  var query = connection.query("SELECT username FROM accounts WHERE username='bob'", function(error,results,fields){
-    if(error){
-      console.log(error);
-    } else {
-      console.log("Results are" + results);
-    }
-  })
+  
   console.log(users.length);
   res.send('Unauthorized');
 };
-
-app.get("/content",auth,function(req,res){
-  res.send("See only after login!");
-});
+*/
 
 
 // use the parse to get JSON objects out of the request.
 app.use(bodyParser.json());
 
 // server static files from the public/ directory.
-app.use(express.static('public'));
+app.use(express.static(__dirname+'/public'));
 
+
+app.post("/login", function(req,res){
+  console.log("post request to login");
+  var query = connection.query("SELECT username FROM accounts WHERE username='testuser'", function(error,results,fields){
+    if(error){
+      console.log(error);
+      //res.sendStatus(500);
+    }
+    if (results.length == 0){
+      //no such user
+      //res.sendStatus(500);
+    } else {
+      connection.query("SELECT password FROM accounts WHERE username='testuser'",function(error, results,fields){
+        if (error){
+          console.log(error);
+        }
+        console.log(results);
+        if('letmein' == results[0].password) {
+          console.log("YOU ARE IN!");
+          //req.session.user = req.body.username;
+          res.redirect("http://google.com");
+        } else {
+          //give out error
+          res.sendStatus(500);
+        }
+      })
+    }
+    
+  });
+});
 
 app.post("/register", function (req,res){
   console.log("POST request to: /register");
@@ -81,6 +106,11 @@ app.get("/gettop", function(req,res){
       res.json(results);
     }
   })
+});
+
+//send HTML via get request
+app.get("/test",function(req,res){
+  res.sendFile('public/register.html',{root: __dirname});
 });
 
 
