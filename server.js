@@ -63,8 +63,8 @@ app.post("/login", function(req,res){
         console.log(results);
         if('letmein' == results[0].password) {
           console.log("YOU ARE IN!");
-          //req.session.user = req.body.username;
-          res.redirect("http://google.com");
+          req.session.user = req.body.username;
+          //res.redirect("test");
         } else {
           //give out error
           res.sendStatus(500);
@@ -84,14 +84,15 @@ app.post("/register", function (req,res){
     if (err){
       console.log(err);
     } else {
+      connection.query("UPDATE accounts SET date_registered = NOW() WHERE username='"+info.username+"' AND password='"+info.password+"'", function(err,result){
+        if (err){
+          console.log(err);
+        }
+      })
       //console.log(result);
     }
   });
   console.log(query.sql);
-});
-
-app.post("/login", function (req,res){
-  console.log("POST Request to :/login");
 });
 
 app.get("/gettop", function(req,res){
@@ -108,9 +109,30 @@ app.get("/gettop", function(req,res){
   })
 });
 
+
+app.get("/getSubsaiddits", function(req,res){
+  console.log("GET Request to :/getSubsaiddits");
+  var response;
+  var query = connection.query('SELECT title FROM subsaiddits', function(error,results,fields){ 
+  //TODO: change value of 0 to what we consider top AND add sort by descending
+    if (error){
+      console.log(error);
+    } else {
+      //console.log(results);
+      res.json(results);
+    }
+  })
+});
+
 //send HTML via get request
 app.get("/test",function(req,res){
-  res.sendFile('public/register.html',{root: __dirname});
+  //res.sendFile('public/register.html',{root: __dirname});
+  res.send({ redirect: '/register.html' });
+});
+
+app.post("/testPost",function(req,res){
+  console.log("POST to testPost");
+  //res.status(302).redirect("/register.html");
 });
 
 

@@ -1,11 +1,13 @@
 $(document).ready(function(){
 
-	$('.form-register').submit(function(){
-		console.log("form submitted");
+	$('.create-account').click(function(){
+		
 
 		var info = 	{username: $('#inputUsername').val(), email: $('#inputEmail').val(),password: $('#inputPassword').val()};
 
 		alert(JSON.stringify(info));
+
+
 
 		$.ajax({
 			url: '/register',
@@ -17,6 +19,9 @@ $(document).ready(function(){
 				console.log("worked");
 			}
 		});
+
+	console.log("form submitted");
+	//return false;
 	});
 
 
