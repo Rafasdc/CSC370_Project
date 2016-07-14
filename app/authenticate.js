@@ -47,10 +47,11 @@ Authenticate = (function() {
 
   // API Call
   Authenticate.login = function(req, res) {
-    var body = utils.safeParse(req.body.body);
+    var body = req.body;
     login(body, function(err, sessionToken, account) {
-      if(err != null) {
+      if(err) {
         utils.clearCookie(res);
+        console.log(err);
         return res.status(400).send({error: err});
       }
       else
@@ -87,6 +88,7 @@ Authenticate = (function() {
  })();
 
  login = function (data, callback) {
+  console.log(data);
   if(data.username == null) {
     return callback("Must provide a username");
   }
@@ -97,7 +99,7 @@ Authenticate = (function() {
   var username = data.username;
   var password = data.password;
   var salt = 'j15t9s01md'
-  password += salt
+  //password += salt
 
   database.getConnection().query("SELECT password, id FROM accounts WHERE username = ?", [username], function(error, results, fields) {
     if (error){
@@ -109,7 +111,10 @@ Authenticate = (function() {
       return callback('No user found');
     } else {
       console.log(results);
+      console.log(results[0].password);
+      console.log(password);
       var passed = bcrypt.compareSync(password, results[0].password);
+      console.log(passed);
       if(passed != true) {
         return callback("Invalid username or password");
       }
@@ -139,7 +144,7 @@ register = function(body, callback) {
   var salt = bcrypt.genSaltSync(10);
   var hashed = bcrypt.hashSync(password, salt);
 
-  var post = {username: username, email: email, password: hashed, date_registered: new Date().toISOString()};
+  var post = {username: username, email: email, password: hashed, date_registered: new Date().toISOString().substring(0, 19).replace('T', ' ')};
 
   var query = database.getConnection().query('INSERT INTO accounts SET ?', post, function(err, result){
     if (err) {

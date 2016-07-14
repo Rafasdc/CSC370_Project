@@ -47,7 +47,6 @@ app.get("/getSubsaiddits", function(req,res){
   console.log("GET Request to :/getSubsaiddits");
   var response;
   var query = database.getConnection().query('SELECT title FROM subsaiddits', function(error,results,fields){
-  //TODO: change value of 0 to what we consider top AND add sort by descending
     if (error){
       console.log(error);
     } else {
@@ -57,6 +56,7 @@ app.get("/getSubsaiddits", function(req,res){
   })
 });
 
+/*
 //send HTML via get request
 app.get("/test",function(req,res){
   //res.sendFile('public/register.html',{root: __dirname});
@@ -67,7 +67,18 @@ app.post("/testPost",function(req,res){
   console.log("POST to testPost");
   //res.status(302).redirect("/register.html");
 });
+*/
 
+/*
+app.use('/user/:id/:post', function (req, res, next) {
+  console.log('Request Type:', req.method);
+  next();
+});
+
+app.get('/user/:id/:post', function (req, res, next) {
+  res.send(req.params.post);
+});
+*/
 
 
 app.listen(config.port, function () {

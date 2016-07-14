@@ -5,7 +5,7 @@ $(document).ready(function(){
 
 		var info = 	{username: $('#inputUsername').val(), email: $('#inputEmail').val(),password: $('#inputPassword').val()};
 
-		alert(JSON.stringify(info));
+		//alert(JSON.stringify(info));
 
 
 
@@ -15,7 +15,6 @@ $(document).ready(function(){
 			contentType: "application/json",
 			data: JSON.stringify(info),
 			success: function(){
-				alert(info);
 				console.log("worked");
 			}
 		});

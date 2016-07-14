@@ -1,19 +1,5 @@
 $(document).ready(function(){
 
-	$('.form-sign-in').click(function(){
-		$.post("/testPost",function(e,data,status){
-			e.preventDefault();
-			console.log("stasus is " + status);
-			console.log(data);
-			//document.location.href = data.redirect;
-			return false;
-		});
-
-		$('.login-form').addClass("hidden");
-
-	})
-
-
 	$.get("/gettop", function(data,status){
 		console.log(data);
 		console.log(data[0].title);
