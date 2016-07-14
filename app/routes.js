@@ -2,6 +2,7 @@
 var config        = require('../config');
 
 var Authenticate  = require('./authenticate');
+var Handler = require('./handler');
 
 
 module.exports = function(app, express) {
@@ -12,9 +13,13 @@ module.exports = function(app, express) {
   router.post('/register', Authenticate.register);
   router.post('/checkLogin',Authenticate.ensureLoggedIn);
   //get a subsaiddit front page
-  //router.get('/s/:subsaiddit',)
+  router.get('/:subsaiddit', Handler.sendSubsaiddit);
   //get a post from a subsaiddit
-  //router.get('/s/:subsaidditTitle/:post')
+  router.get('/:subsaiddit/:post', Handler.getPost);
+  //add and delete posts
+  //router.get('/:subsaiddit/:addPost', Handler.addPost);
+  //router.get('/:subsaiddit/:deletePost',Handler.deletePost);
+
 
   return router;
 };

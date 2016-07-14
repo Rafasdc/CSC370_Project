@@ -31,7 +31,7 @@ app.use(favicon('./public/assets/images/favicon.ico'));
 app.get("/gettop", function(req,res){
   console.log("GET Request to :/gettop");
   var response;
-  var query = database.getConnection().query('SELECT title,rating FROM posts,post_ratings WHERE rating > 0', function(error,results,fields){
+  var query = database.getConnection().query('SELECT title,rating,url FROM posts,post_ratings WHERE rating > 0', function(error,results,fields){
   //TODO: change value of 0 to what we consider top AND add sort by descending
     if (error){
       console.log(error);
@@ -56,13 +56,14 @@ app.get("/getSubsaiddits", function(req,res){
   })
 });
 
-/*
+
 //send HTML via get request
 app.get("/test",function(req,res){
-  //res.sendFile('public/register.html',{root: __dirname});
-  res.send({ redirect: '/register.html' });
+   return res.sendFile('public/subsaiddit.html',{root: __dirname});
+  //res.send({ redirect: '/register.html' });
 });
 
+/*
 app.post("/testPost",function(req,res){
   console.log("POST to testPost");
   //res.status(302).redirect("/register.html");

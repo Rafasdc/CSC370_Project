@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/login.js"></script>
+
+    <title>CSC370 Project</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+    <!-- styles for this -->
+    <link href="../css/format.css" rel="stylesheet">
+
+
+  </head>
+
+  <body>
+
+
+      <div class="container-fluid">
+      <!-- Static navbar -->
+        <nav class="navbar navbar-default navbar-static-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand">CSC 370 Project</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="../index.html">Home</a></li>
+                <li><a href="../create_post.html">Add Post</a></li>
+                <li><a href="../delete_post.html">Delete Post</a></li>
+              </ul>
+              <form class="navbar-form navbar-right login-logout-form">
+                <div class="form-group">
+                  <input type="text" placeholder="Username" class="form-control request-username">
+                </div>
+                <div class="form-group">
+                  <input type="password" placeholder="Password" class="form-control request-password">
+                </div>
+                <button type="button" class="btn btn-default form-sign-in form-group">Sign in</button>
+                <a href="../register.html" class="btn btn-default form-group" role="button">Register</a>
+                <button type='button' class="btn btn-default form-logout hidden">Logout</button>
+              </form><!-- end form login -->
+            </div><!--/.nav-collapse -->
+          </div><!--/.container-fluid -->
+        </nav>
+      </div>
+      
+    <div class="container-fluid">
+      <div class="row row-offcanvas row-offcanvas-left">
+        
+        <!-- sidebar -->
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <h2>Other Subsaiddits</h2>
+            <ul class="list-group subsaiddits-list">         
+            </ul>
+        </div>
+    
+        <!-- main area -->
+        <div class="col-xs-12 col-sm-9">
+          <h1 class="subsaiddit-title"></h1>
+            <ul class="list-group top-posts-list"></ul>
+        </div><!-- /.col-xs-12 main -->
+    </div><!--/.row-->
+  </div><!--/.container-->
+
+     
+
+    
+
+
+    <!-- Bootstrap core JavaScrip
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  </body>
+</html>
