@@ -5,9 +5,10 @@ GRANT SELECT,INSERT,DELETE,UPDATE ON * TO csc370_admin;
 
 
 CREATE TABLE accounts (
-	username VARCHAR(32) NOT NULL UNIQUE PRIMARY KEY,
+  id INT PRIMARY KEY,
+	username VARCHAR(32) NOT NULL UNIQUE,
 	email VARCHAR(64),
-	password VARCHAR(40) NOT NULL,
+	password VARCHAR(120) NOT NULL,
 	date_registered DATETIME
 );
 

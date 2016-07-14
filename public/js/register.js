@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	$('.create-account').click(function(){
-		
+
 
 		var info = 	{username: $('#inputUsername').val(), email: $('#inputEmail').val(),password: $('#inputPassword').val()};
 
@@ -10,7 +10,7 @@ $(document).ready(function(){
 
 
 		$.ajax({
-			url: '/register',
+			url: '/api/register',
 			type: 'POST',
 			contentType: "application/json",
 			data: JSON.stringify(info),
