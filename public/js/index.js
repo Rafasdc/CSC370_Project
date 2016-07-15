@@ -10,6 +10,8 @@ $(document).ready(function(){
 		console.log('error getting posts');
 	});
 
+
+	//should only get the default ones if not logged in
 	$.get("/getSubsaiddits", function(data,status){
 		//console.log(data);
 		//console.log(data[0].title);

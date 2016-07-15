@@ -51,12 +51,14 @@
         <h2 class="form-register-heading">Please Register</h2>
         <input type="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address">
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div id="register-status"></div>
+
         <button class="btn btn-lg btn-primary btn-block create-account" type="button">Register</button>
       </form>
+      <h3 class="register-status-failed hidden" align="center" style="color:#ff4040">User Already Exists</h3>
+      <h3 class="register-status-success hidden" align="center" style="color:#0000FF">User Created!</h3>
 
 
 

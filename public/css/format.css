@@ -35,7 +35,7 @@ body {
 .form-register .form-control:focus {
   z-index: 2;
 }
-.form-register input[type="user"] {
+.form-register input[type="email"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;

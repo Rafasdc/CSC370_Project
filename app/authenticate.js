@@ -4,6 +4,8 @@ var config       = require('../config');
 var utils        = require('./utils');
 var database     = require('./database');
 
+
+
 var Authenticate;
 Authenticate = (function() {
 
@@ -26,9 +28,10 @@ Authenticate = (function() {
 
   // Middleware - ensure user is logged in
   Authenticate.ensureLoggedIn = function(req, res, next) {
+    console.log(req.cookies);
     if(req.cookies != null){
       if (req.cookies[config.cookieName] != null) {
-        return utils.verifySessionToken(req.cookies[config.cookieName], function(err) {
+        return utils.verifySessionToken(req.cookies[config.cookieName], function(err,accountID,expiry) {
           if (err)
           {
             utils.clearCookie(res);
@@ -36,6 +39,7 @@ Authenticate = (function() {
           }
           else
           {
+            req.accountID = accountID;
             return next();
           }
         });
@@ -82,6 +86,20 @@ Authenticate = (function() {
       utils.setCookie(res, sessionToken);
       res.status(200).send(JSON.stringify(results));
     });
+  }
+
+  Authenticate.sendLoginStatus = function(req, res){
+    console.log("USER IS LOGGED IN");
+    console.log(req.accountID);
+    getLoggedUser(req.accountID, function(err,user){
+      if(err){
+        console.log(err);
+        return res.status(400).send({error: err});
+      } else {
+        console.log(user);
+        res.status(200).send(user);
+      }
+    })
   }
 
   return Authenticate;
@@ -163,6 +181,21 @@ register = function(body, callback) {
     }
   });
 
+
+
 }
+
+
+  getLoggedUser = function(accountID, callback){
+    database.getConnection().query("SELECT username FROM accounts WHERE id = ?", accountID, function(error, results, fields) {
+      if (error){
+        console.log(error);
+        return callback(error);
+      } else {
+        //console.log(results[0].username);
+        callback(null,results[0].username)
+      }
+    });
+  }
 
 module.exports = Authenticate;

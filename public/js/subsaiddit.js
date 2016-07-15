@@ -1,5 +1,11 @@
 $(document).ready(function(){
 
+
+	var subsaiddit_name = window.location.pathname.split('/')[2];
+
+	$(".subsaiddit-title").append(subsaiddit_name);
+	
+
 	$.get("/getPosts", function(data,status){
 		//console.log(data);
 		//console.log(data[0].title);

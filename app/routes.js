@@ -11,7 +11,7 @@ module.exports = function(app, express) {
   router.post('/login', Authenticate.login);
   router.post('/logout', Authenticate.ensureLoggedIn, Authenticate.logout);
   router.post('/register', Authenticate.register);
-  router.post('/checkLogin',Authenticate.ensureLoggedIn);
+  router.post('/checkLogin',Authenticate.ensureLoggedIn,Authenticate.sendLoginStatus);
   //get a subsaiddit front page
   router.get('/:subsaiddit', Handler.sendSubsaiddit);
   //get a post from a subsaiddit

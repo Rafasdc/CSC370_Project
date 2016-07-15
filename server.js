@@ -4,6 +4,7 @@ var express    = require("express");
 var app        = express();
 var bodyParser = require("body-parser");
 var session    = require('express-session');
+var cookieParser = require('cookie-parser')
 var favicon    = require('serve-favicon');
 var config     = require('./config');
 var database   = require('./app/database')
@@ -15,6 +16,8 @@ app.use(session({
   resave: true,
   saveUnintialized: true
 }))
+
+app.use(cookieParser('pr0jec7_csc3702016'))
 
 // use the parse to get JSON objects out of the request.
 app.use(bodyParser.json());

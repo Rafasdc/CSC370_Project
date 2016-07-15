@@ -9,6 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="../../js/login.js"></script>
 
     <title>CSC370 Project</title>
 
@@ -31,18 +32,21 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="index.html">Home</a></li>
+              <li class="active"><a href="../../index.html">Home</a></li>
             </ul>
-            <form class="navbar-form navbar-right">
-              <div class="form-group">
-                <input type="text" placeholder="Email" class="form-control">
-              </div>
-              <div class="form-group">
-                <input type="password" placeholder="Password" class="form-control">
-              </div>
-              <button type="submit" class="btn btn-success">Sign in</button>
-              <button class="btn btn-default">Register</button>
-            </form>
+              <form class="navbar-form navbar-right login-logout-form">
+                <div class="form-group form-sign-in">
+                  <input type="text" placeholder="Username" class="form-control request-username">
+                </div>
+                <div class="form-group form-sign-in">
+                  <input type="password" placeholder="Password" class="form-control request-password">
+                </div>
+                <button type="button" class="btn btn-default form-group form-sign-in">Sign in</button>
+                <a href="register.html" class="btn btn-default form-group form-sign-in" role="button">Register</a>
+                <div class="form-group form-logged-in welcome-message hidden">Welcome </div>
+                <button type='button' class="btn btn-success form-logged-in hidden" id="myPage">My Page</button>
+                <button type='button' class="btn btn-default form-logged-in hidden" id="logout">Logout</button>
+              </form><!-- end form login-logout -->
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </nav>
@@ -50,21 +54,21 @@
       <div class ="container-fluid">
         <div class ="row">
           <div class="col-md-1" align="center">
-            <div>1430</div>
+            <div class="rating">1430</div>
             <button type="button" class="btn btn-default">
-              <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon-triangle-top"></span>
             </button>
             <br>
             <button type="button" class="btn btn-default">
-              <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon-triangle-bottom" ></span>
             </button>
           </div>
           <div class="col-md-4">
-            <h1>Post Title</h1>
+            <h1 class="post-title">Post Title</h1>
           </div>
             <div class ="row">
               <div class="col-md-12">
-                <p>Contrary to popular belief, Lorem Ipsum is not simply random text.
+                <p class="post-text">Contrary to popular belief, Lorem Ipsum is not simply random text.
                   It has roots in a piece of classical Latin literature from 45 BC,
                   making it over 2000 years old. Richard McClintock, a Latin professor
                   at Hampden-Sydney College in Virginia, looked up one of the more obscure
@@ -80,7 +84,9 @@
                    "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact
                    original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
               </div><!-- end post text -->
-          <div class ="container-fluid"><!-- comment container -->
+
+          <!--
+          <div class ="container-fluid">
             <div class ="row">
               <div class="col-sm-4 col-sm-offset-1">
                 <h2>Comments</h2>
@@ -90,7 +96,9 @@
               <div class = "col-sm-6 col-sm-offset-1">
                 TEST COMMENT
               </div>
-        </div><!-- end comment container -->
+        </div><
+       -->
+
         </div>
       </div>
     </div> <!-- end post and comment container -->

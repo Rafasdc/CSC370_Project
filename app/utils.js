@@ -58,6 +58,7 @@ ServerUtils = (function() {
     if(ServerUtils.generateSessionToken(accountId, expiry) != token) {
       return callback("Token has been modified");
     }
+    console.log(accountId);
     return callback(null, accountId, expiry);
   }
 
