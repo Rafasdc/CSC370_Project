@@ -69,7 +69,7 @@ Handler.sendSubsaidditPosts = function (req,res){
      if (error){
        console.log(error);
      } else {
-       console.log(results);
+       //console.log(results);
        res.send(results);
      }
    })
@@ -81,7 +81,7 @@ Handler.sendSubsaidditPosts = function (req,res){
       if (error){
         console.log(error);
       } else {
-          console.log(results);
+        //console.log(results);
         res.send({subscribed:results.length != 0});
       }
     })
@@ -95,7 +95,7 @@ Handler.sendSubsaidditPosts = function (req,res){
 	 	if (error){
 	      console.log(error);
 	    } else {
-	      console.log(results.length);
+	      //console.log(results.length);
 	      if (results.length > 0){
 	      	return res.send("Already Subscribed");
 	      } else {
@@ -118,7 +118,7 @@ Handler.sendSubsaidditPosts = function (req,res){
  	 	if (error){
  	      console.log(error);
  	    } else {
- 	      console.log(results.length);
+ 	      //console.log(results.length);
  	      return res.send("Successfully Unsubscribed");
  	    }
   	})
@@ -131,7 +131,7 @@ Handler.getPostContent = function (req,res){
     if (error){
         console.log(error);
       } else {
-        console.log(results);
+        //console.log(results);
         if (results.length == 0){
           res.send("Post not found");
         }else {
@@ -255,7 +255,7 @@ Handler.getPostContent = function (req,res){
             results[i].rating = 0;
           }
         }
-        console.log(results);
+        //console.log(results);
         res.send(results);
       }
     })
