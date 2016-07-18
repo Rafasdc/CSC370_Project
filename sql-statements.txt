@@ -99,9 +99,9 @@ CREATE TABLE friends(
 );
 
 
-INSERT INTO accounts(username,email,password,date_registered) VALUES('testuser','test@test.com','letmein',NOW());
+INSERT INTO accounts(username,email,password,date_registered) VALUES('testuser','test@test.com','$2a$10$RmnvccS.9RGKTFDWFECC9OSeFhL8hU1vlvTYtU.zP7DhiqcQ18RYe',NOW());
 
-INSERT INTO accounts(username,email,password,date_registered) VALUES('usertwo','two@test.com','password',NOW());
+INSERT INTO accounts(username,email,password,date_registered) VALUES('usertwo','two@test.com','$2a$10$q/pqrThWCV7Kqzp9ASr3AujxXeKarY.YQIaTAjhv1HP1gNlppkoFm',NOW());
 
 INSERT INTO subsaiddits VALUES('Front',NULL,'This is a test subsaiddit','0','testuser');
 

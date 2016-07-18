@@ -157,24 +157,29 @@ Handler.getPostContent = function (req,res){
   }
 
   Handler.addFriend = function (req, res) {
-
-    database.getConnection().query("SELECT 1 FROM friends WHERE (account1 = ? AND account2 = ?) OR (account1 = ? AND account2 = ?)",[req.username, req.body.friend, req.body.friend, req.username], function(error,results,fields){
-      if (error){
-        console.log(error);
+    database.getConnection().query("SELECT 1 FROM accounts WHERE username = ?", [req.body.friend], function(error, results, fields) {
+      if(results.length == 0) {
+        res.send("User not found.");
       } else {
-        if(results.length == 0) {
-          database.getConnection().query("INSERT INTO friends VALUES (?, ?)", [req.username, req.body.friend], function(error, results, fields) {
-            if(error) {
-              console.log(error);
+        database.getConnection().query("SELECT 1 FROM friends WHERE (account1 = ? AND account2 = ?) OR (account1 = ? AND account2 = ?)",[req.username, req.body.friend, req.body.friend, req.username], function(error,results,fields){
+          if (error){
+            console.log(error);
+          } else {
+            if(results.length == 0) {
+              database.getConnection().query("INSERT INTO friends VALUES (?, ?)", [req.username, req.body.friend], function(error, results, fields) {
+                if(error) {
+                  console.log(error);
+                }
+                console.log("Added friend between " + req.username + " and " + req.body.friend);
+                res.send("success");
+              })
+            } else {
+              res.send("Already friends");
             }
-            console.log("Added friend between " + req.username + " and " + req.body.friend);
-            res.send("Added as friends");
-          })
-        } else {
-          res.send("Already friends");
-        }
+          }
+        })
       }
-    })
+    });
   }
 
 

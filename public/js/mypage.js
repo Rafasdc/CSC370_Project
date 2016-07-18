@@ -65,7 +65,27 @@ $(document).ready(function(){
 		window.location = "/s/" + this.id;
 	});
 
+	$('#friend-add-btn').click(function(){
 
+		var data = 	{friend: $('.friend-username').val()};
+		$.ajax({
+			url: '/addFriend',
+			type: 'POST',
+			contentType: "application/json",
+			data: JSON.stringify(data),
+			success: function(result){
+				if(result == "success") {
+					$(".friends-list").append("<li>" + data.friend + "</li>")
+				} else {
+					alert(result);
+				}
+			}
+
+		});
+
+		//$('.login-form').addClass("hidden");
+
+	})
 
 
 });
