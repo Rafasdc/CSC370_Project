@@ -226,7 +226,7 @@ Handler.getPostContent = function (req,res){
   }
 
   Handler.getUsersPosts = function (req, res){
-    var query = database.getConnection().query("SELECT title,SUM(rating) AS 'rating',url FROM posts LEFT JOIN post_ratings ON posts.id = post_ratings.post WHERE poster=? GROUP BY title,rating,url",req.username,function(error,results){
+    var query = database.getConnection().query("SELECT title,SUM(rating) AS 'rating',url,id FROM posts LEFT JOIN post_ratings ON posts.id = post_ratings.post WHERE poster=? GROUP BY title,rating,url,id",req.username,function(error,results){
       if(error){
         console.log(error);
       } else {
@@ -242,7 +242,7 @@ Handler.getPostContent = function (req,res){
   }
 
   Handler.deletePost = function(req,res){
-    var query = database.getConnection().query("DELETE FROM posts WHERE url=? and poster=?",[req.body.url, req.username], function(error,results){
+    var query = database.getConnection().query("DELETE FROM posts WHERE id=? and poster=?",[req.body.id, req.username], function(error,results){
       if(error){
         console.log(error);
         res.status(400).send("Erro deleting post");

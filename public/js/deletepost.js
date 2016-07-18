@@ -4,7 +4,7 @@ $(document).ready(function() {
 		//console.log(data);
 		//console.log(data[0].title);
 		for (var i = 0; i < data.length ; i++){
-			$(".top-posts-list").append("<a href='#'class='list-group-item top-post' id='"+data[i].url+"'><span class='badge'>"+data[i].rating+"</span>"+data[i].title+"</a><button id='"+data[i].url+"' type='button' class='btn btn-danger delete-button'>Delete</button>");
+			$(".top-posts-list").append("<a href='#'class='list-group-item top-post' id='"+data[i].url+"'><span class='badge'>"+data[i].rating+"</span>"+data[i].title+"</a><button id='"+data[i].id+"' type='button' class='btn btn-danger delete-button'>Delete</button>");
 		}
 	}).fail(function(){
 		console.log('error getting posts');
@@ -22,7 +22,8 @@ $(document).ready(function() {
 	});
 
 	$('body').on('click','.delete-button', function(data){
-		var info = {url : this.id}
+		var info = {id : this.id}
+		alert(this.id);
 		//alert(this.id);
 		$.ajax({
 			url: '/deletePost',
