@@ -34,7 +34,7 @@ app.use(favicon('./public/assets/images/favicon.ico'));
 app.get("/gettop", function(req,res){
   console.log("GET Request to :/gettop");
   var response;
-  var query = database.getConnection().query('SELECT title,rating,url FROM posts,post_ratings WHERE rating > 0', function(error,results,fields){
+  var query = database.getConnection().query('SELECT title,rating,url FROM posts LEFT JOIN post_ratings ON posts.id = post_ratings.post', function(error,results,fields){
   //TODO: change value of 0 to what we consider top AND add sort by descending
     if (error){
       console.log(error);

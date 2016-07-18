@@ -1,8 +1,8 @@
 $(document).ready(function(){
 
 
-	var subsaiddit_name = window.location.pathname.split('/')[3];
-	var post_name = window.location.pathname.split('/')[4];
+	var subsaiddit_name = window.location.pathname.split('/')[2];
+	var post_name = window.location.pathname.split('/')[3];
 
 	function toTitleCase(str){
     	return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});

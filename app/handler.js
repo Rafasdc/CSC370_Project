@@ -42,7 +42,7 @@ Handler = (function() {
 Handler.sendSubsaidditPosts = function (req,res){
 	console.log("get request to getSubsaidditPosts");
 	console.log(req.params.subsaiddit);
-	var query = database.getConnection().query("SELECT title,rating,url FROM posts,post_ratings WHERE subsaiddit=?",req.params.subsaiddit, function(error,results,fields){
+	var query = database.getConnection().query("SELECT title,rating,url FROM posts LEFT JOIN post_ratings ON posts.id = post_ratings.post WHERE subsaiddit=?",req.params.subsaiddit, function(error,results,fields){
     if (error){
       console.log(error);
     } else {
