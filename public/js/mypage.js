@@ -39,6 +39,15 @@ $(document).ready(function(){
 
 	});
 
+	$.get("/getFriends", function(data,status){
+		console.log(data);
+		for(var i = 0; i < data.length; i++) {
+			$(".friends-list").append("<li>" + data[i] + "</li>")
+		}
+	}).fail(function(){
+		console.log('error getting friends');
+	});
+
 
 	$('body').on('click','#subsaiddits', function(data){
 		//alert(this.innerHTML);

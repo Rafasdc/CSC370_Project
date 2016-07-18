@@ -146,10 +146,49 @@ Handler.getPostContent = function (req,res){
           res.send(results);
         }
         //console.log(results);
-        
+
       }
   })
 }
+
+  Handler.sendFriends = function (req,res) {
+    var friends = [];
+    database.getConnection().query("SELECT account1,account2 FROM friends WHERE account1 = ? OR account2 = ?",[req.username, req.username], function(error,results,fields){
+      if (error){
+        console.log(error);
+      } else {
+        for(var i = 0; i < results.length; i++) {
+          if(results[i].account1 == req.username) {
+            friends.push(results[i].account2);
+          } else {
+            friends.push(results[i].account1);
+          }
+        }
+        res.send(friends);
+      }
+    })
+  }
+
+  Handler.addFriend = function (req, res) {
+
+    database.getConnection().query("SELECT 1 FROM friends WHERE (account1 = ? AND account2 = ?) OR (account1 = ? AND account2 = ?)",[req.username, req.body.friend, req.body.friend, req.username], function(error,results,fields){
+      if (error){
+        console.log(error);
+      } else {
+        if(results.length == 0) {
+          database.getConnection().query("INSERT INTO friends VALUES (?, ?)", [req.username, req.body.friend], function(error, results, fields) {
+            if(error) {
+              console.log(error);
+            }
+            console.log("Added friend between " + req.username + " and " + req.body.friend);
+            res.send("Added as friends");
+          })
+        } else {
+          res.send("Already friends");
+        }
+      }
+    })
+  }
 
 
 
