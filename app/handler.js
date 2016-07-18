@@ -218,7 +218,7 @@ Handler.getPostContent = function (req,res){
       if(error){
         console.log(error);
       } else {
-        res.status(200);
+        res.status(200).send("Post Created");
       }
     })
 

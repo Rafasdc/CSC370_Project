@@ -18,9 +18,10 @@ $(document).ready(function(){
 				window.location = "/s/"+subsaiddit_name;
 			},
 			error: function() {
-				console.log("error");
+				console.log("error in function");
 				//$('#post-creating-failed').removeClass('hidden');
 			}
+			
 		});
 
 		//return false;
