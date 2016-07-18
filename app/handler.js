@@ -161,12 +161,18 @@ Handler.getPostContent = function (req,res){
       if(results.length == 0) {
         res.send("User not found.");
       } else {
-        database.getConnection().query("SELECT 1 FROM friends WHERE (account1 = ? AND account2 = ?) OR (account1 = ? AND account2 = ?)",[req.username, req.body.friend, req.body.friend, req.username], function(error,results,fields){
+        var account1 = req.username;
+        var account2 = req.body.friend;
+        if(account1 > account2) {
+          account1 = req.body.friend;
+          account2 = req.username;
+        }
+        database.getConnection().query("SELECT 1 FROM friends WHERE account1 = ? AND account2 = ?",[account1, account2], function(error,results,fields){
           if (error){
             console.log(error);
           } else {
             if(results.length == 0) {
-              database.getConnection().query("INSERT INTO friends VALUES (?, ?)", [req.username, req.body.friend], function(error, results, fields) {
+              database.getConnection().query("INSERT INTO friends VALUES (?, ?)", [account1, account2], function(error, results, fields) {
                 if(error) {
                   console.log(error);
                 }
