@@ -54,7 +54,7 @@ Handler.sendSubsaidditPosts = function (req,res){
 
 
   Handler.sendSubscribed = function (req,res){
-  	var query = database.getConnection().query("SELECT subsaiddit FROM subscriptions WHERE account= (SELECT username FROM accounts WHERE id=?)",req.accountID, function(error,results,fields){
+  	var query = database.getConnection().query("SELECT subsaiddit FROM subscriptions WHERE account= ?",req.username, function(error,results,fields){
      if (error){
        console.log(error);
      } else {
@@ -66,7 +66,7 @@ Handler.sendSubsaidditPosts = function (req,res){
 
    Handler.isSubscribed = function (req,res){
     console.log("get request for isSubscribed " + req.accountID + " " + req.params.subsaiddit);
-   	var query = database.getConnection().query("SELECT subsaiddit FROM subscriptions WHERE account= (SELECT username FROM accounts WHERE id=?) AND subsaiddit = ?",[req.accountID, req.params.subsaiddit], function(error,results,fields){
+   	var query = database.getConnection().query("SELECT subsaiddit FROM subscriptions WHERE account= ? AND subsaiddit = ?",[req.username, req.params.subsaiddit], function(error,results,fields){
       if (error){
         console.log(error);
       } else {
