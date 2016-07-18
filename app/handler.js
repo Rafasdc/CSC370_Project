@@ -12,13 +12,23 @@ Handler = (function() {
 
 
  Handler.getPost = function(req,res){
+  var query = database.getConnection().query("SELECT title,subsaiddit FROM post WHERE title=? and subsaiddit=?",[req.params.post,req.params.subsaiddit],function(error,results){
+    if(error){
+      console.log(error);
+    } else {
+      if (results.length == 0){
+        res.status(404).send("Not Found");
+      } else {
+        return res.sendFile('public/display_post.html', {root: "."}); //. = directory where server.js is
+      }
+    }
+  })
  	//check post exists here
- 	return res.sendFile('public/display_post.html', {root: "."}); //. = directory where server.js is
  }
 
 
  Handler.sendSubsaiddit = function (req,res){
- 	query= database.getConnection().query("SELECT title FROM subsaiddits WHERE title=?",req.params.subsaiddit,function(error,results,fields){
+ 	var query= database.getConnection().query("SELECT title FROM subsaiddits WHERE title=?",req.params.subsaiddit,function(error,results,fields){
  		if (error){
       	console.log(error);
     	} else {
