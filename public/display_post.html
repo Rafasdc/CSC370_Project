@@ -55,14 +55,16 @@
       <div class ="container-fluid">
         <div class ="row">
           <div class="col-md-1" align="center">
-            <div class="post-rating"></div>
-            <button type="button" class="btn btn-default">
-              <span class="glyphicon glyphicon-triangle-top"></span>
-            </button>
-            <br>
-            <button type="button" class="btn btn-default">
-              <span class="glyphicon glyphicon-triangle-bottom" ></span>
-            </button>
+            <div class="post-rating" style="display:inline-block"></div>
+            <div style="display:inline-block">
+              <button type="button" class="btn btn-default" id="post-upvote">
+                <span class="glyphicon glyphicon-triangle-top"></span>
+              </button>
+              <br>
+              <button type="button" class="btn btn-default" id="post-downvote">
+                <span class="glyphicon glyphicon-triangle-bottom" ></span>
+              </button>
+            </div>
           </div>
           <div class="col-md-4">
             <h1 class="post-title"></h1>

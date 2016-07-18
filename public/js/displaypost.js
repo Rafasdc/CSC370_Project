@@ -17,15 +17,40 @@ $(document).ready(function(){
 	$.get("/getPost/"+subsaiddit_name+"/"+post_name, function(data,status){
 		//console.log(data);
 		//console.log(data[0].title);
-		$(".post-text").append(data[0].text);
-		//$(".")
-		if (data[0].rating != null){
-			$(".post-rating").append(data[0].rating);
-		}else {
-			$(".post-rating").append(0);
-		}
+		$(".post-text").append(data.text);
+		$(".post-rating").append(data.rating);
 	}).fail(function(){
 		console.log('error getting posts');
+	});
+
+	$('#post-upvote').click(function(){
+		var data = 	{rating: 1};
+		$.ajax({
+			url: '/vote/' + subsaiddit_name + "/" + post_name,
+			type: 'POST',
+			contentType: "application/json",
+			data: JSON.stringify(data),
+			success: function(result){
+				$.get("/getRating/"+subsaiddit_name+"/"+post_name, function(data, status) {
+					$(".post-rating").html(data.rating);
+				})
+			}
+		});
+	});
+
+	$('#post-downvote').click(function(){
+		var data = 	{rating: -1};
+		$.ajax({
+			url: '/vote/' + subsaiddit_name + "/" + post_name,
+			type: 'POST',
+			contentType: "application/json",
+			data: JSON.stringify(data),
+			success: function(result){
+				$.get("/getRating/"+subsaiddit_name+"/"+post_name, function(data, status) {
+					$(".post-rating").html(data.rating);
+				})
+			}
+		});
 	});
 
 /*

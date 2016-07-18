@@ -116,24 +116,28 @@ Handler.sendSubsaidditPosts = function (req,res){
 Handler.getPostContent = function (req,res){
   data = {subsaiddit : req.params.subsaiddit, title : req.params.post_title.replace("_"," ")}
   //console.log(data);
-  database.getConnection().query("SELECT id,text,rating FROM posts,post_ratings WHERE (posts.subsaiddit=? and title=?) and (id = post_ratings.post)",[data.subsaiddit,data.title],function(error,results,fields){
+  database.getConnection().query("SELECT id,text FROM posts WHERE subsaiddit=? and title=?",[data.subsaiddit,data.title],function(error,results,fields){
     if (error){
         console.log(error);
       } else {
         console.log(results);
         if (results.length == 0){
-          database.getConnection().query("SELECT text FROM posts WHERE (posts.subsaiddit=? and title=?)",[data.subsaiddit,data.title],function(error,results){
-            if (error){
-              console.log(error);
-            } else {
-              res.send(results);
-            }
-          })
+          res.send("Post not found");
         }else {
-          res.send(results);
+          var post_data = {id: results[0].id, text: results[0].text};
+          var total = 0;
+          database.getConnection().query("SELECT rating FROM post_ratings WHERE post = ?", [results[0].id], function(error, results, fields) {
+            if(error) {
+              console.log(error);
+            }
+            for(var i = 0; i < results.length; i++) {
+              total += parseInt(results[i].rating);
+            }
+            post_data.rating = total;
+            res.send(post_data);
+          });
         }
         //console.log(results);
-
       }
   })
 }
@@ -208,8 +212,8 @@ Handler.getPostContent = function (req,res){
     var post = {
         title: req.body.title,
         url: req.body.url,
-        time_published: new Date().toISOString().substring(0, 19).replace('T', ' '), 
-        text: req.body.text, 
+        time_published: new Date().toISOString().substring(0, 19).replace('T', ' '),
+        text: req.body.text,
         subsaiddit: req.body.subsaiddit,
         poster: req.username
       }
@@ -248,6 +252,63 @@ Handler.getPostContent = function (req,res){
         res.status(400).send("Erro deleting post");
       } else {
         res.status(200).send("Post deleted");
+      }
+    })
+  }
+
+
+  Handler.vote = function(req, res) {
+    data = {subsaiddit : req.params.subsaiddit, title : req.params.post.replace("_"," ")}
+    database.getConnection().query("SELECT id FROM posts WHERE title = ?", [data.title], function(error, results, fields) {
+      if(error) {
+        console.log(error);
+      }
+      if(results.length == 0) {
+        res.send("post not found");
+      } else {
+        var postId = results[0].id;
+        database.getConnection().query("SELECT rating FROM post_ratings WHERE account = ? AND post = ?", [req.username, postId], function(error, results,fields) {
+          if(results.length == 0) {
+            database.getConnection().query("INSERT INTO post_ratings (account, post, rating) VALUES (?, ?, ?)", [req.username, postId, req.body.rating], function(error, results, fields) {
+              if(error) {
+                console.log(error);
+                res.send(error);
+              } else {
+                res.send("success");
+              }
+            })
+          } else {
+            database.getConnection().query("UPDATE post_ratings SET rating = ? WHERE account = ? AND post = ?", [req.body.rating, req.username, postId], function(error, results, fields) {
+              if(error) {
+                console.log(error);
+                res.send(error);
+              } else {
+                res.send("success");
+              }
+            })
+          }
+        })
+      }
+    })
+  }
+
+  Handler.getRating = function(req, res) {
+    data = {subsaiddit : req.params.subsaiddit, title : req.params.post.replace("_"," ")}
+    database.getConnection().query("SELECT id FROM posts WHERE title = ?", [data.title], function(error, results, fields) {
+      if(results.length == 0) {
+        res.send("post not found");
+      } else {
+        var postId = results[0].id;
+        var total = 0;
+        database.getConnection().query("SELECT rating FROM post_ratings WHERE post = ?", [postId], function(error, results, fields) {
+          if(error) {
+            console.log(error);
+          }
+          for(var i = 0; i < results.length; i++) {
+            total += parseInt(results[i].rating);
+          }
+          res.send({rating: total});
+        })
       }
     })
   }

@@ -19,6 +19,8 @@ module.exports = function(app, express) {
   router.get('/getPostsList/:subsaiddit',Handler.sendSubsaidditPosts);
   router.post('/subscribe/:subsaiddit',Authenticate.ensureLoggedIn, Handler.subscribeUser);
   router.post('/unsubscribe/:subsaiddit',Authenticate.ensureLoggedIn, Handler.unsubscribeUser);
+  router.post('/vote/:subsaiddit/:post', Authenticate.ensureLoggedIn, Handler.vote);
+  router.get('/getRating/:subsaiddit/:post', Handler.getRating);
   //add and delete posts
   //router.get('/:subsaiddit/:addPost', Handler.addPost);
   //router.get('/:subsaiddit/:deletePost',Handler.deletePost);
