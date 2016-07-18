@@ -1,8 +1,10 @@
-CREATE DATABASE csc370_project;
-USE csc370_project;
+
 CREATE USER csc370_admin IDENTIFIED BY 'finalProject';
 GRANT SELECT,INSERT,DELETE,UPDATE ON * TO csc370_admin;
 
+
+CREATE DATABASE csc370_project;
+USE csc370_project;
 
 CREATE TABLE accounts (
   	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -49,7 +51,7 @@ CREATE TABLE comments(
 	post INTEGER NOT NULL,
 	FOREIGN KEY (parent) REFERENCES comments(id),
 	FOREIGN KEY (poster) REFERENCES accounts(username),
-	FOREIGN KEY (post) REFERENCES posts(id)
+	FOREIGN KEY (post) REFERENCES posts(id) ON DELETE CASCADE
 );
 
 
@@ -77,7 +79,7 @@ CREATE TABLE comment_ratings(
 	comment INTEGER NOT NULL,
 	rating INTEGER NOT NULL DEFAULT 1,
 	FOREIGN KEY (account) REFERENCES accounts(username),
-	FOREIGN KEY (comment) REFERENCES comments(id)
+	FOREIGN KEY (comment) REFERENCES comments(id) ON DELETE CASCADE
 );
 
 
@@ -87,7 +89,7 @@ CREATE TABLE post_ratings(
 	post INTEGER NOT NULL,
 	rating INTEGER NOT NULL DEFAULT 1,
 	FOREIGN KEY (account) REFERENCES accounts(username),
-	FOREIGN KEY (post) REFERENCES posts(id)
+	FOREIGN KEY (post) REFERENCES posts(id) ON DELETE CASCADE
 );
 
 
