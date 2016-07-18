@@ -161,6 +161,10 @@ Handler.getPostContent = function (req,res){
   }
 
   Handler.addFriend = function (req, res) {
+    if(req.username == req.body.friend) {
+      res.send("Cannot be friends with yourself");
+      return;
+    }
     database.getConnection().query("SELECT 1 FROM accounts WHERE username = ?", [req.body.friend], function(error, results, fields) {
       if(results.length == 0) {
         res.send("User not found.");
