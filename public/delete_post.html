@@ -9,8 +9,10 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="../../js/addpost.js"></script>
-     <script src="../../js/login.js"></script>
+    <script src="js/deletepost.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.2/js.cookie.min.js"></script>
+    <script src="js/login.js"></script>
+
 
     <title>CSC370 Project</title>
 
@@ -18,28 +20,28 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
 
-    <!-- Custom styles for this template -->
-    <link href="../../css/format.css" rel="stylesheet">
-   
+    <!-- styles for this -->
+    <link href="css/format.css" rel="stylesheet">
+
 
   </head>
 
   <body>
 
-    
 
-       <!-- Static navbar -->
-      <nav class="navbar navbar-default navbar-static-top">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">CSC 370 Project</a>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="../index.html">Home</a></li>
-              <li class="active"><a href="">Add Post</a></li>
-              <li><a href="../delete_post.html">Delete Post</a></li>
-            </ul>
+      <div class="container-fluid">
+      <!-- Static navbar -->
+        <nav class="navbar navbar-default navbar-static-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">CSC 370 Project</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="index.html">Home</a></li>
+                <!-- <li><a href="create_post.html">Add Post</a></li> -->
+                <!-- <li><a href="delete_post.html">Delete Post</a></li> -->
+              </ul>
               <form class="navbar-form navbar-right login-logout-form">
                 <div class="form-group form-sign-in">
                   <input type="text" placeholder="Username" class="form-control request-username">
@@ -48,28 +50,32 @@
                   <input type="password" placeholder="Password" class="form-control request-password">
                 </div>
                 <button type="button" class="btn btn-default form-group form-sign-in">Sign in</button>
-                <a href="../register.html" class="btn btn-default form-group form-sign-in" role="button">Register</a>
+                <a href="register.html" class="btn btn-default form-group form-sign-in" role="button">Register</a>
                 <div class="form-group form-logged-in welcome-message hidden">Welcome </div>
                 <button type='button' class="btn btn-success form-logged-in hidden" id="myPage">My Page</button>
                 <button type='button' class="btn btn-default form-logged-in hidden" id="logout">Logout</button>
               </form><!-- end form login-logout -->
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-      </nav>
+            </div><!--/.nav-collapse -->
+          </div><!--/.container-fluid -->
+        </nav>
+      </div>
+      
+    <div class="container-fluid">
+      <div class="row row-offcanvas row-offcanvas-left">    
+        <!-- main area -->
+        <div class="col-xs-12 col-sm-9">
+          <h1>My Posts</h1>
+            <ul class="list-group top-posts-list"></ul>
+        </div><!-- /.col-xs-12 main -->
+    </div><!--/.row-->
+  </div><!--/.container-->
 
-      <form class="form-register">
-        <h2 class="form-register-heading">Create a Post</h2>
-        <input type="title" id="postTitle" class="form-control" placeholder="Title" required autofocus>
-        <label for="posText">Post Text:</label>
-        <textarea class="form-control" rows ="6" id="postText"></textarea>
-        <p></p>
-        <button class="btn btn-lg btn-primary btn-block create-post" type="button">Post</button>
-      </form>
-      <h3 class="post-creation-status-failed hidden" align="center" style="color:#ff4040" id="register-status-failed">Post Creation Failed</h3>
+     
+
+    
 
 
-
-    <!-- Bootstrap core JavaScript
+    <!-- Bootstrap core JavaScrip
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

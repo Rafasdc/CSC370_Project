@@ -15,7 +15,7 @@ $(document).ready(function(){
 				window.location.href = window.location.origin + "/index.html";
 			},
 			error: function() {
-				$('#register-status-failed').removeClass('hidden');
+				$('#post-creation-status-failed').removeClass('hidden');
 			}
 		});
 

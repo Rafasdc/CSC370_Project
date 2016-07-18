@@ -225,6 +225,22 @@ Handler.getPostContent = function (req,res){
 
   }
 
+  Handler.getUsersPosts = function (req, res){
+    var query = database.getConnection().query("SELECT title,SUM(rating) AS 'rating',url FROM posts LEFT JOIN post_ratings ON posts.id = post_ratings.post WHERE poster=? GROUP BY title,rating,url",req.username,function(error,results){
+      if(error){
+        console.log(error);
+      } else {
+        for(var i = 0; i < results.length; i++) {
+          if(!results[i].rating) {
+            results[i].rating = 0;
+          }
+        }
+        console.log(results);
+        res.send(results);
+      }
+    })
+  }
+
 
 
 return Handler;
