@@ -12,7 +12,7 @@ Handler = (function() {
 
 
  Handler.getPost = function(req,res){
-  var query = database.getConnection().query("SELECT title,subsaiddit FROM post WHERE title=? and subsaiddit=?",[req.params.post,req.params.subsaiddit],function(error,results){
+  var query = database.getConnection().query("SELECT title,subsaiddit FROM posts WHERE title=? and subsaiddit=?",[req.params.post,req.params.subsaiddit],function(error,results){
     if(error){
       console.log(error);
     } else {
