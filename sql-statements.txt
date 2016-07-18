@@ -120,3 +120,4 @@ INSERT INTO comment_ratings VALUES('testuser',1,1);
 INSERT INTO post_ratings VALUES('testuser',1,1);
 
 INSERT INTO friends VALUES('testuser','usertwo');
+INSERT INTO friends VALUES('usertwo', 'testuser');
