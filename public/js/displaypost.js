@@ -14,7 +14,7 @@ $(document).ready(function(){
 	$(".subsaiddit-title").append(subsaiddit_name + "    ");
 	$(".post-title").append(toTitleCase(post_title));
 
-	$.get("/api/getPost/"+subsaiddit_name+"/"+post_name, function(data,status){
+	$.get("/getPost/"+subsaiddit_name+"/"+post_name, function(data,status){
 		//console.log(data);
 		//console.log(data[0].title);
 		$(".post-text").append(data[0].text);
@@ -43,15 +43,15 @@ $(document).ready(function(){
 
 	$('body').on('click','#subsaiddits', function(data){
 		//alert(this.innerHTML);
-		var route = "/api/s/"+this.innerHTML;
+		var route = "/s/"+this.innerHTML;
 		window.location = route;
-		
+
 	});
 
 	$('body').on('click','.top-post', function(data){
 		//alert(this.innerHTML);
 		//alert(this.id);
-		window.location = "/api/s" + this.id;
+		window.location = "/s" + this.id;
 	});
 
 	$('body').on('click','#myPage', function(data){
@@ -61,7 +61,7 @@ $(document).ready(function(){
 
 
 	$('body').on('click','.subscribe-button', function(data){
-		$.post("/api/subscribe/"+subsaiddit_name, function(data,status){
+		$.post("/subscribe/"+subsaiddit_name, function(data,status){
 			if (data == "Already Subscribed"){
 				alert("Already Subscribed to this Subsaiddit");
 			}
@@ -76,6 +76,6 @@ $(document).ready(function(){
 
 
 
-	
+
 
 });

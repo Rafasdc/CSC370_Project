@@ -13,10 +13,10 @@ Handler = (function() {
 
  Handler.getPost = function(req,res){
  	//check post exists here
- 	return res.sendFile('public/display_post.html', {root: "."}); //. = directory where server.js is 
+ 	return res.sendFile('public/display_post.html', {root: "."}); //. = directory where server.js is
  }
 
- 
+
  Handler.sendSubsaiddit = function (req,res){
  	query= database.getConnection().query("SELECT title FROM subsaiddits WHERE title=?",req.params.subsaiddit,function(error,results,fields){
  		if (error){
@@ -31,7 +31,7 @@ Handler = (function() {
  	})
  	//check subsaiddit exits here
  	//console.log("HERE");
- 	
+
  }
 
  Handler.sendNotAuthorized = function (req,res){
@@ -53,17 +53,28 @@ Handler.sendSubsaidditPosts = function (req,res){
 }
 
 
+  Handler.sendSubscribed = function (req,res){
+  	var query = database.getConnection().query("SELECT subsaiddit FROM subscriptions WHERE account= (SELECT username FROM accounts WHERE id=?)",req.accountID, function(error,results,fields){
+     if (error){
+       console.log(error);
+     } else {
+       console.log(results);
+       res.send(results);
+     }
+   })
+  }
 
- Handler.sendSubscribed = function (req,res){
- 	var query = database.getConnection().query("SELECT subsaiddit FROM subscriptions WHERE account= (SELECT username FROM accounts WHERE id=?)",req.accountID, function(error,results,fields){
-    if (error){
-      console.log(error);
-    } else {
-      console.log(results);
-      res.send(results);
-    }
-  })
- }
+   Handler.isSubscribed = function (req,res){
+    console.log("get request for isSubscribed " + req.accountID + " " + req.params.subsaiddit);
+   	var query = database.getConnection().query("SELECT subsaiddit FROM subscriptions WHERE account= (SELECT username FROM accounts WHERE id=?) AND subsaiddit = ?",[req.accountID, req.params.subsaiddit], function(error,results,fields){
+      if (error){
+        console.log(error);
+      } else {
+          console.log(results);
+        res.send({subscribed:results.length != 0});
+      }
+    })
+   }
 
  Handler.subscribeUser = function(req,res){
 
@@ -88,6 +99,19 @@ Handler.sendSubsaidditPosts = function (req,res){
 	    }
  	})
  }
+  Handler.unsubscribeUser = function(req,res){
+
+  	var data = {account: req.username, subsaiddit: req.params.subsaiddit}
+  	console.log(data);
+  	database.getConnection().query("DELETE FROM subscriptions WHERE account='"+data.account+"' and subsaiddit='"+data.subsaiddit+"'",function(error,results,fields){
+ 	 	if (error){
+ 	      console.log(error);
+ 	    } else {
+ 	      console.log(results.length);
+ 	      return res.send("Successfully Unsubscribed");
+ 	    }
+  	})
+  }
 
 Handler.getUser = function(req,res,next){
 	var query = database.getConnection().query("SELECT username FROM accounts WHERE ID=?",req.accountID, function(error,results,fields){
@@ -133,4 +157,3 @@ return Handler;
 })();
 
 module.exports = Handler;
-

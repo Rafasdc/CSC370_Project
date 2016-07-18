@@ -4,8 +4,18 @@ $(document).ready(function(){
 	var subsaiddit_name = window.location.pathname.split('/')[2];
 
 	$(".subsaiddit-title").append(subsaiddit_name + "    ");
-	$(".subsaiddit-title").append("<button type='button' class='btn btn-primary subscribe-button'>Subscribe</button>");
+	$(".subsaiddit-title").append("<button type='button' class='btn btn-primary unsubscribe-button hidden'>Unsubscribe</button>");
+	$(".subsaiddit-title").append("<button type='button' class='btn btn-primary subscribe-button hidden'>Subscribe</button>");
 
+	$.get("/getSubscribed/"+subsaiddit_name, function(data,status){
+		if(data.subscribed == true) {
+			$(".unsubscribe-button").removeClass('hidden');
+		} else {
+			$(".subscribe-button").removeClass('hidden');
+		}
+	}).fail(function(){
+		console.log('error getting subscription status');
+	});
 
 	$.get("/getPostsList/"+subsaiddit_name, function(data,status){
 		//console.log(data);
@@ -51,9 +61,15 @@ $(document).ready(function(){
 
 	$('body').on('click','.subscribe-button', function(data){
 		$.post("/subscribe/"+subsaiddit_name, function(data,status){
-			if (data == "Already Subscribed"){
-				alert("Already Subscribed to this Subsaiddit");
-			}
+			$(".subscribe-button").addClass('hidden');
+			$(".unsubscribe-button").removeClass('hidden');
+		})
+
+	});
+	$('body').on('click','.unsubscribe-button', function(data){
+		$.post("/unsubscribe/"+subsaiddit_name, function(data,status){
+			$(".unsubscribe-button").addClass('hidden');
+			$(".subscribe-button").removeClass('hidden');
 		})
 
 	});
