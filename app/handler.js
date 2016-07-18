@@ -188,6 +188,43 @@ Handler.getPostContent = function (req,res){
     });
   }
 
+  Handler.getAddPost = function (req, res){
+    var query= database.getConnection().query("SELECT title FROM subsaiddits WHERE title=?",req.params.subsaiddit,function(error,results,fields){
+    if (error){
+        console.log(error);
+      } else {
+          if (results.length == 0){
+            res.status(404).send("Subsaiddit Does not Exist");
+          } else {
+            return res.sendFile('/public/create_post.html',{root: "."}); //. = directory where server.js is
+          }
+      }
+  })
+  }
+
+  Handler.insertPost = function(req, res){
+    console.log(req.body);
+    console.log(req.username);
+    var post = {
+        title: req.body.title,
+        url: req.body.url,
+        time_published: new Date().toISOString().substring(0, 19).replace('T', ' '), 
+        text: req.body.text, 
+        subsaiddit: req.body.subsaiddit,
+        poster: req.username
+      }
+    //console.log(req.accuntID);
+    var query = database.getConnection().query("INSERT INTO posts SET ? ", post, function(error, results){
+      if(error){
+        console.log(error);
+      } else {
+        res.status(200);
+      }
+    })
+
+
+  }
+
 
 
 return Handler;

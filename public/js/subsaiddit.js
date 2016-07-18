@@ -3,6 +3,8 @@ $(document).ready(function(){
 
 	var subsaiddit_name = window.location.pathname.split('/')[2];
 
+	$(".add-post").attr("href","/addPost/"+subsaiddit_name);
+
 	$(".subsaiddit-title").append(subsaiddit_name + "    ");
 	$(".subsaiddit-title").append("<button type='button' class='btn btn-primary unsubscribe-button hidden'>Unsubscribe</button>");
 	$(".subsaiddit-title").append("<button type='button' class='btn btn-primary subscribe-button hidden'>Subscribe</button>");

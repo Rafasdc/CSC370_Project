@@ -28,6 +28,7 @@ Authenticate = (function() {
 
   // Middleware - ensure user is logged in
   Authenticate.ensureLoggedIn = function(req, res, next) {
+    //console.log("IN ensured Logged IN");
     //console.log(req.cookies);
     if(req.cookies != null){
       if (req.cookies[config.cookieName] != null) {

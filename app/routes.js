@@ -26,6 +26,8 @@ module.exports = function(app, express) {
   router.get('/getSubscribed/:subsaiddit',Authenticate.ensureLoggedIn, Handler.isSubscribed);
   router.get('/notAuthorized',Handler.sendNotAuthorized);
   router.get("/getPost/:subsaiddit/:post_title", Handler.getPostContent);
+  router.get("/addPost/:subsaiddit", Handler.getAddPost)
+  router.post("/insertPost",Authenticate.ensureLoggedIn, Handler.insertPost);
 
   router.get("/getFriends", Authenticate.ensureLoggedIn, Handler.sendFriends);
   router.post("/addFriend", Authenticate.ensureLoggedIn, Handler.addFriend);
