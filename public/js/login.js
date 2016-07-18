@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-	
-	$.post("/api/checkLogin",function(data,status){
+
+	$.post("/checkLogin",function(data,status){
 		//console.log("logged in");
 		//console.log(data.username);
 		//console.log(status);
@@ -13,7 +13,7 @@ $(document).ready(function(){
 
 		}
 	});
-	
+
 
 
 
@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 
 		$.ajax({
-			url: '/api/login',
+			url: '/login',
 			type: 'POST',
 			contentType: "application/json",
 			data: JSON.stringify(data),
@@ -43,7 +43,7 @@ $(document).ready(function(){
 	})
 
 	$("#logout").click(function(){
-		$.post("/api/logout",function(data,status){
+		$.post("/logout",function(data,status){
 			console.log(status);
 			window.location.href = "index.html";
 		});
@@ -55,4 +55,4 @@ $(document).ready(function(){
 
 
 
-});	
+});

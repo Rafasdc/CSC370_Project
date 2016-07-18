@@ -161,6 +161,7 @@ register = function(body, callback) {
   // bcrypt does the salting for us
   var salt = bcrypt.genSaltSync(10);
   var hashed = bcrypt.hashSync(password, salt);
+  console.log(hashed);
 
   var post = {username: username, email: email, password: hashed, date_registered: new Date().toISOString().substring(0, 19).replace('T', ' ')};
 
