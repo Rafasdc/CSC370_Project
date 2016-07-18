@@ -8,7 +8,7 @@ $(document).ready(function(){
     	return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 	}
 
-	post_title = post_name.replace("_", " ");
+	post_title = post_name.split('_').join(' ')
 
 
 	$(".subsaiddit-title").append(subsaiddit_name + "    ");

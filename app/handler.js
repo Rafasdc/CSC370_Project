@@ -124,7 +124,7 @@ Handler.sendSubsaidditPosts = function (req,res){
   }
 
 Handler.getPostContent = function (req,res){
-  data = {subsaiddit : req.params.subsaiddit, title : req.params.post_title.replace("_"," ")}
+  data = {subsaiddit : req.params.subsaiddit, title : req.params.post_title.split('_').join(' ')}
   //console.log(data);
   database.getConnection().query("SELECT id,text FROM posts WHERE subsaiddit=? and title=?",[data.subsaiddit,data.title],function(error,results,fields){
     if (error){
@@ -273,7 +273,7 @@ Handler.getPostContent = function (req,res){
 
 
   Handler.vote = function(req, res) {
-    data = {subsaiddit : req.params.subsaiddit, title : req.params.post.replace("_"," ")}
+    data = {subsaiddit : req.params.subsaiddit, title : req.params.post.split('_').join(' ')}
     database.getConnection().query("SELECT id FROM posts WHERE title = ?", [data.title], function(error, results, fields) {
       if(error) {
         console.log(error);
@@ -319,7 +319,7 @@ Handler.getPostContent = function (req,res){
   }
 
   Handler.getRating = function(req, res) {
-    data = {subsaiddit : req.params.subsaiddit, title : req.params.post.replace("_"," ")}
+    data = {subsaiddit : req.params.subsaiddit, title : req.params.post.split('_').join(' ')}
     database.getConnection().query("SELECT id FROM posts WHERE title = ?", [data.title], function(error, results, fields) {
       if(results.length == 0) {
         res.send("post not found");
