@@ -293,14 +293,25 @@ Handler.getPostContent = function (req,res){
               }
             })
           } else {
-            database.getConnection().query("UPDATE post_ratings SET rating = ? WHERE account = ? AND post = ?", [req.body.rating, req.username, postId], function(error, results, fields) {
-              if(error) {
-                console.log(error);
-                res.send(error);
-              } else {
-                res.send("success");
-              }
-            })
+            if(results[0].rating == req.body.rating) {
+              database.getConnection().query("DELETE FROM post_ratings WHERE account = ? AND post = ?", [req.username, postId], function(error, results, fields) {
+                if(error) {
+                  console.log(error);
+                  res.send(error);
+                } else {
+                  res.send("success");
+                }
+              })
+            } else {
+              database.getConnection().query("UPDATE post_ratings SET rating = ? WHERE account = ? AND post = ?", [req.body.rating, req.username, postId], function(error, results, fields) {
+                if(error) {
+                  console.log(error);
+                  res.send(error);
+                } else {
+                  res.send("success");
+                }
+              })
+            }
           }
         })
       }
