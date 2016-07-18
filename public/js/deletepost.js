@@ -23,7 +23,6 @@ $(document).ready(function() {
 
 	$('body').on('click','.delete-button', function(data){
 		var info = {id : this.id}
-		alert(this.id);
 		//alert(this.id);
 		$.ajax({
 			url: '/deletePost',
@@ -32,6 +31,7 @@ $(document).ready(function() {
 			data: JSON.stringify(info),
 			success: function(){
 				console.log("worked");
+				alert("Deleted Post");
 				window.location.href = window.location.pathname;
 			},
 			error: function() {
