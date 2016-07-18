@@ -28,6 +28,7 @@ module.exports = function(app, express) {
   router.get("/getPost/:subsaiddit/:post_title", Handler.getPostContent);
   router.get("/addPost/:subsaiddit", Handler.getAddPost)
   router.post("/insertPost",Authenticate.ensureLoggedIn, Handler.insertPost);
+  router.post("/deletePost", Authenticate.ensureLoggedIn, Handler.deletePost);
 
   router.get("/getUsersPosts",Authenticate.ensureLoggedIn, Handler.getUsersPosts);
 

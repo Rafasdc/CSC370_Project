@@ -241,6 +241,17 @@ Handler.getPostContent = function (req,res){
     })
   }
 
+  Handler.deletePost = function(req,res){
+    var query = database.getConnection().query("DELETE FROM posts WHERE url=? and poster=?",[req.body.url, req.username], function(error,results){
+      if(error){
+        console.log(error);
+        res.status(400).send("Erro deleting post");
+      } else {
+        res.status(200).send("Post deleted");
+      }
+    })
+  }
+
 
 
 return Handler;
