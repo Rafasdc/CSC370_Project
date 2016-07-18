@@ -12,7 +12,7 @@ $(document).ready(function(){
 			data: JSON.stringify(info),
 			success: function(){
 				console.log("worked");
-				window.location.href = "index.html";
+				window.location.href = window.location.origin + "/index.html";
 			},
 			error: function() {
 				$('#register-status-failed').removeClass('hidden');

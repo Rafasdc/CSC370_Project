@@ -44,19 +44,19 @@ $(document).ready(function(){
 	$('body').on('click','#subsaiddits', function(data){
 		//alert(this.innerHTML);
 		var route = "/s/"+this.innerHTML;
-		window.location = route;
+		window.location = window.location.origin + route;
 
 	});
 
 	$('body').on('click','.top-post', function(data){
 		//alert(this.innerHTML);
 		//alert(this.id);
-		window.location = "/s" + this.id;
+		window.location = window.location.origin + "/s" + this.id;
 	});
 
 	$('body').on('click','#myPage', function(data){
 		//alert(this.innerHTML);
-		window.location = "../../mypage.html";
+		window.location = window.location.origin + "/mypage.html";
 	});
 
 

@@ -3,6 +3,8 @@ $(document).ready(function(){
 
 	var subsaiddit_name = window.location.pathname.split('/')[2];
 
+	$(".add-post").attr("href","/addPost/"+subsaiddit_name);
+
 	$(".subsaiddit-title").append(subsaiddit_name + "    ");
 	$(".subsaiddit-title").append("<button type='button' class='btn btn-primary unsubscribe-button hidden'>Unsubscribe</button>");
 	$(".subsaiddit-title").append("<button type='button' class='btn btn-primary subscribe-button hidden'>Subscribe</button>");
@@ -47,19 +49,19 @@ $(document).ready(function(){
 	$('body').on('click','#subsaiddits', function(data){
 		//alert(this.innerHTML);
 		var route = "/s/"+this.innerHTML;
-		window.location = route;
+		window.location = window.location.origin + route;
 
 	});
 
 	$('body').on('click','.top-post', function(data){
 		//alert(this.innerHTML);
 		//alert(this.id);
-		window.location = "/s" + this.id;
+		window.location = window.location.origin + "/s" + this.id;
 	});
 
 	$('body').on('click','#myPage', function(data){
 		//alert(this.innerHTML);
-		window.location = "../../mypage.html";
+		window.location = window.location.origin + "/mypage.html";
 	});
 
 
@@ -80,7 +82,7 @@ $(document).ready(function(){
 
 	$('body').on('click','.add-post', function(data){
 		//alert(this.innerHTML);
-		window.location = "../../mypage.html";
+		window.location = window.location.origin + "/mypage.html";
 	});
 
 

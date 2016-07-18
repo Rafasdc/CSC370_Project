@@ -56,13 +56,13 @@ $(document).ready(function(){
 	$('body').on('click','#subsaiddits', function(data){
 		//alert(this.innerHTML);
 		var route = "/s/"+this.innerHTML;
-		window.location = route;
+		window.location = window.location.origin + route;
 
 	});
 
 	$('body').on('click','.top-post', function(data){
 		//alert(this.innerHTML);
-		window.location = "/s/" + this.id;
+		window.location = window.location.origin + "/s/" + this.id;
 	});
 
 	$('#friend-add-btn').click(function(){

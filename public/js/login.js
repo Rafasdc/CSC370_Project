@@ -45,14 +45,8 @@ $(document).ready(function(){
 	$("#logout").click(function(){
 		$.post("/logout",function(data,status){
 			console.log(status);
-			window.location.href = "index.html";
+			window.location.href = window.location.origin + "/index.html";
 		});
 	})
-
-
-
-
-
-
 
 });

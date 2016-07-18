@@ -40,6 +40,11 @@ app.get("/gettop", function(req,res){
       console.log(error);
     } else {
       //console.log(results);
+      for(var i = 0; i < results.length; i++) {
+        if(!results[i].rating) {
+          results[i].rating = 0;
+        }
+      }
       res.json(results);
     }
   })

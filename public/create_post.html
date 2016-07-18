@@ -9,6 +9,8 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="../../js/addpost.js"></script>
+     <script src="../../js/login.js"></script>
 
     <title>CSC370 Project</title>
 
@@ -17,11 +19,8 @@
 
 
     <!-- Custom styles for this template -->
-    <link href="css/format.css" rel="stylesheet">
-
-
-    <script src="js/register.js"></script>
-    <script src="js/login.js"></script>
+    <link href="../../css/format.css" rel="stylesheet">
+   
 
   </head>
 
@@ -37,9 +36,9 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="index.html">Home</a></li>
-              <li class="active"><a href="create_post.html">Add Post</a></li>
-              <li><a href="delete_post.html">Delete Post</a></li>
+              <li><a href="../index.html">Home</a></li>
+              <li class="active"><a href="">Add Post</a></li>
+              <li><a href="../delete_post.html">Delete Post</a></li>
             </ul>
               <form class="navbar-form navbar-right login-logout-form">
                 <div class="form-group form-sign-in">
@@ -49,7 +48,7 @@
                   <input type="password" placeholder="Password" class="form-control request-password">
                 </div>
                 <button type="button" class="btn btn-default form-group form-sign-in">Sign in</button>
-                <a href="register.html" class="btn btn-default form-group form-sign-in" role="button">Register</a>
+                <a href="../register.html" class="btn btn-default form-group form-sign-in" role="button">Register</a>
                 <div class="form-group form-logged-in welcome-message hidden">Welcome </div>
                 <button type='button' class="btn btn-success form-logged-in hidden" id="myPage">My Page</button>
                 <button type='button' class="btn btn-default form-logged-in hidden" id="logout">Logout</button>
@@ -61,11 +60,10 @@
       <form class="form-register">
         <h2 class="form-register-heading">Create a Post</h2>
         <input type="title" id="postTitle" class="form-control" placeholder="Title" required autofocus>
-        <label for="inputEmail" class="sr-only">Text</label>
         <label for="posText">Post Text:</label>
         <textarea class="form-control" rows ="6" id="postText"></textarea>
         <p></p>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Post</button>
+        <button class="btn btn-lg btn-primary btn-block create-post" type="button">Post</button>
       </form>
 
 
