@@ -27,7 +27,7 @@ app.use(express.static(__dirname+'/public'));
 
 // API ROUTES ------------------------
 var apiRoutes = require('./app/routes')(app, express);
-app.use('/api', apiRoutes);
+app.use('/', apiRoutes);
 
 app.use(favicon('./public/assets/images/favicon.ico'));
 

@@ -1,11 +1,11 @@
-CREATE DATABASE csc370_project;
+CREATE DATABASE IF NOT EXISTS csc370_project;
 USE csc370_project;
 CREATE USER csc370_admin IDENTIFIED BY 'finalProject';
 GRANT SELECT,INSERT,DELETE,UPDATE ON * TO csc370_admin;
 
 
 CREATE TABLE accounts (
-  id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
 	username VARCHAR(32) NOT NULL UNIQUE,
 	email VARCHAR(64),
 	password VARCHAR(120) NOT NULL,
@@ -99,15 +99,15 @@ CREATE TABLE friends(
 );
 
 
-INSERT INTO accounts VALUES('testuser','test@test.com','letmein',NOW());
+INSERT INTO accounts (username, email, password, date_registered) VALUES('testuser','test@test.com','letmein',NOW());
 
-INSERT INTO accounts VALUES('usertwo','two@test.com','password',NOW());
+INSERT INTO accounts (username, email, password, date_registered)VALUES('usertwo','two@test.com','password',NOW());
 
 INSERT INTO subsaiddits VALUES('Front',NULL,'This is a test subsaiddit','0','testuser');
 
-INSERT INTO posts VALUES('1','First post','/Front/first_post',NOW(),NULL,'My first post in this subsaiddit','Front','testuser');
+INSERT INTO posts (title,url,time_published,time_edited,text,subsaiddit,poster) VALUES('First post','/Front/first_post',NOW(),NULL,'My first post in this subsaiddit','Front','testuser');
 
-INSERT INTO posts(title,url,time_published,time_edited,text,subsaiddit,poster) VALUES('Second post','/Front/second_post',NOW(),NULL,'My second post in this subsaiddit','Front','testuser');
+INSERT INTO posts (title,url,time_published,time_edited,text,subsaiddit,poster) VALUES('Second post','/Front/second_post',NOW(),NULL,'My second post in this subsaiddit','Front','testuser');
 
 INSERT INTO comments(text,time_posted,parent,poster,post) VALUES('Commenting on myself',NOW(),1,'testuser',1);
 
