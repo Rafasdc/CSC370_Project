@@ -62,7 +62,7 @@ $(document).ready(function(){
 
 	$('body').on('click','.top-post', function(data){
 		//alert(this.innerHTML);
-		window.location = window.location.origin + "/s/" + this.id;
+		window.location = window.location.origin + "/s" + this.id;
 	});
 
 	$('#friend-add-btn').click(function(){
