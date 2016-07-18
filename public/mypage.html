@@ -9,9 +9,9 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="js/index.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.2/js.cookie.min.js"></script>
     <script src="js/login.js"></script>
+    <script src="js/mypage.js"></script>
+    
 
 
     <title>CSC370 Project</title>
@@ -40,7 +40,7 @@
               <ul class="nav navbar-nav">
                 <li class="active"><a href="index.html">Home</a></li>
                 <!-- <li><a href="create_post.html">Add Post</a></li> -->
-                <!-- <li><a href="delete_post.html">Delete Post</a></li> -->
+                <li><a href="delete_post.html">Delete Posts</a></li>
               </ul>
               <form class="navbar-form navbar-right login-logout-form">
                 <div class="form-group form-sign-in">
@@ -60,19 +60,20 @@
         </nav>
       </div>
       
+
     <div class="container-fluid">
       <div class="row row-offcanvas row-offcanvas-left">
         
         <!-- sidebar -->
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-            <h2>Subsaiddits</h2>
+            <h2>Subscribed Subsaiddits</h2>
             <ul class="list-group subsaiddits-list">         
             </ul>
         </div>
     
         <!-- main area -->
         <div class="col-xs-12 col-sm-9">
-          <h1>Top Posts</h1>
+          <h1>Top Posts from Subscribed Subsaiddits</h1>
             <ul class="list-group top-posts-list"></ul>
         </div><!-- /.col-xs-12 main -->
     </div><!--/.row-->

@@ -26,15 +26,21 @@ $(document).ready(function(){
 
 	$('body').on('click','#subsaiddits', function(data){
 		//alert(this.innerHTML);
-		var route = "/api/"+this.innerHTML;
+		var route = "/api/s/"+this.innerHTML;
 		window.location = route;
 		
 	});
 
 	$('body').on('click','.top-post', function(data){
 		//alert(this.innerHTML);
-		window.location = "/api" + this.id;
+		window.location = "/api/s" + this.id;
 	});
+
+	$('body').on('click','#myPage', function(data){
+		//alert(this.innerHTML);
+		window.location = "mypage.html";
+	});
+
 
 
 	

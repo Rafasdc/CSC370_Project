@@ -28,14 +28,14 @@ Authenticate = (function() {
 
   // Middleware - ensure user is logged in
   Authenticate.ensureLoggedIn = function(req, res, next) {
-    console.log(req.cookies);
+    //console.log(req.cookies);
     if(req.cookies != null){
       if (req.cookies[config.cookieName] != null) {
         return utils.verifySessionToken(req.cookies[config.cookieName], function(err,accountID,expiry) {
           if (err)
           {
             utils.clearCookie(res);
-            return res.status(400).send({error: err});
+            return res.status(401).send({error: err});
           }
           else
           {
@@ -89,14 +89,14 @@ Authenticate = (function() {
   }
 
   Authenticate.sendLoginStatus = function(req, res){
-    console.log("USER IS LOGGED IN");
-    console.log(req.accountID);
+    //console.log("USER IS LOGGED IN");
+    //console.log(req.accountID);
     getLoggedUser(req.accountID, function(err,user){
       if(err){
         console.log(err);
         return res.status(400).send({error: err});
       } else {
-        console.log(user);
+        //console.log(user);
         res.status(200).send(user);
       }
     })

@@ -3,16 +3,18 @@ $(document).ready(function(){
 	
 	$.post("/api/checkLogin",function(data,status){
 		//console.log("logged in");
-		//console.log(data);
+		//console.log(data.username);
 		//console.log(status);
 		if (status == "success"){
 			$('.form-sign-in').addClass("hidden");
 			$('.welcome-message').append(data);
 			$('.form-logged-in').removeClass("hidden");
 		} else {
-			//not logged in
+
 		}
 	});
+	
+
 
 
 	$('.form-sign-in').click(function(){
