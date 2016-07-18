@@ -31,7 +31,7 @@ Authenticate = (function() {
     //console.log(req.cookies);
     if(req.cookies != null){
       if (req.cookies[config.cookieName] != null) {
-        return utils.verifySessionToken(req.cookies[config.cookieName], function(err,accountID,expiry) {
+        return utils.verifySessionToken(req.cookies[config.cookieName], function(err,accountID, accountName, yexpiry) {
           if (err)
           {
             utils.clearCookie(res);
@@ -40,12 +40,17 @@ Authenticate = (function() {
           else
           {
             req.accountID = accountID;
+            req.username = accountName;
             return next();
           }
         });
       }
     }
     return res.status(401).send();
+  }
+
+  Authenticate.sendLoginStatus = function(req, res){
+    res.status(200).send(req.username);
   }
 
 
@@ -88,20 +93,6 @@ Authenticate = (function() {
     });
   }
 
-  Authenticate.sendLoginStatus = function(req, res){
-    //console.log("USER IS LOGGED IN");
-    //console.log(req.accountID);
-    getLoggedUser(req.accountID, function(err,user){
-      if(err){
-        console.log(err);
-        return res.status(400).send({error: err});
-      } else {
-        //console.log(user);
-        res.status(200).send(user);
-      }
-    })
-  }
-
   return Authenticate;
  })();
 
@@ -136,7 +127,7 @@ Authenticate = (function() {
       if(passed != true) {
         return callback("Invalid username or password");
       }
-      var token = utils.generateSessionToken(results[0].id);
+      var token = utils.generateSessionToken(results[0].id, username);
       var result = {username: username, id: results[0].id};
       return callback(null, token, result);
     }
@@ -175,7 +166,7 @@ register = function(body, callback) {
           console.log(err);
           return callback(err);
         } else {
-          var token = utils.generateSessionToken(results[0].id);
+          var token = utils.generateSessionToken(results[0].id, username);
           return callback(null, token, post);
         }
       });
@@ -185,18 +176,5 @@ register = function(body, callback) {
 
 
 }
-
-
-  getLoggedUser = function(accountID, callback){
-    database.getConnection().query("SELECT username FROM accounts WHERE id = ?", accountID, function(error, results, fields) {
-      if (error){
-        console.log(error);
-        return callback(error);
-      } else {
-        //console.log(results[0].username);
-        callback(null,results[0].username)
-      }
-    });
-  }
 
 module.exports = Authenticate;

@@ -9,7 +9,7 @@ ServerUtils = (function() {
   function ServerUtils() {}
 
   // Generate a signed session token
-  ServerUtils.generateSessionToken = function (accountId, expiresIn) {
+  ServerUtils.generateSessionToken = function (accountId, accountName, expiresIn) {
 
     // 1 day expiry
     var expiry = (Math.floor(Date.now() / 1000) + config.expiryInSeconds);
@@ -18,10 +18,10 @@ ServerUtils = (function() {
     }
 
     // Here's the session info to sign
-    var sessionInfo = (accountId +':' + expiry);
+    var sessionInfo = (accountId + ':' + accountName +':' + expiry);
 
     // Create a key that's a conjunction of the private key and the data
-    var key = (config.secret + '//' + accountId + '//' + expiry);
+    var key = (config.secret + '//' + accountId + '//' + accountName + '//' + expiry);
 
     // Sign it
     var hmac = crypto.createHmac('sha1', key);
@@ -38,13 +38,14 @@ ServerUtils = (function() {
       return callback("Invalid Token");
     }
     var fields = token.split(':');
-    if(fields.length != 3) {
+    if(fields.length != 4) {
       return callback("Invalid Token");
     }
 
     var accountId = fields[0];
-    var expiry = fields[1];
-    var hmacSignature = fields[2];
+    var accountName = fields[1];
+    var expiry = fields[2];
+    var hmacSignature = fields[3];
 
     var accountId = parseInt(accountId);
     var expiry = parseInt(expiry);
@@ -55,11 +56,11 @@ ServerUtils = (function() {
     }
 
     // Does the signature match?
-    if(ServerUtils.generateSessionToken(accountId, expiry) != token) {
+    if(ServerUtils.generateSessionToken(accountId, accountName, expiry) != token) {
       return callback("Token has been modified");
     }
     //console.log(accountId);
-    return callback(null, accountId, expiry);
+    return callback(null, accountId, accountName, expiry);
   }
 
   // Cookies for authentification

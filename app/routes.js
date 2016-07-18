@@ -17,8 +17,8 @@ module.exports = function(app, express) {
   //get a post from a subsaiddit
   router.get('/s/:subsaiddit/:post', Handler.getPost);
   router.get('/getPostsList/:subsaiddit',Handler.sendSubsaidditPosts);
-  router.post('/subscribe/:subsaiddit',Authenticate.ensureLoggedIn, Handler.getUser, Handler.subscribeUser);
-  router.post('/unsubscribe/:subsaiddit',Authenticate.ensureLoggedIn, Handler.getUser, Handler.unsubscribeUser);
+  router.post('/subscribe/:subsaiddit',Authenticate.ensureLoggedIn, Handler.subscribeUser);
+  router.post('/unsubscribe/:subsaiddit',Authenticate.ensureLoggedIn, Handler.unsubscribeUser);
   //add and delete posts
   //router.get('/:subsaiddit/:addPost', Handler.addPost);
   //router.get('/:subsaiddit/:deletePost',Handler.deletePost);
@@ -27,8 +27,8 @@ module.exports = function(app, express) {
   router.get('/notAuthorized',Handler.sendNotAuthorized);
   router.get("/getPost/:subsaiddit/:post_title", Handler.getPostContent);
 
-  router.get("/getFriends", Authenticate.ensureLoggedIn, Handler.getUser, Handler.sendFriends);
-  router.post("/addFriend", Authenticate.ensureLoggedIn, Handler.getUser, Handler.addFriend);
+  router.get("/getFriends", Authenticate.ensureLoggedIn, Handler.sendFriends);
+  router.post("/addFriend", Authenticate.ensureLoggedIn, Handler.addFriend);
 
 
   return router;

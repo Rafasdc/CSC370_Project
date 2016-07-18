@@ -113,19 +113,6 @@ Handler.sendSubsaidditPosts = function (req,res){
   	})
   }
 
-Handler.getUser = function(req,res,next){
-	var query = database.getConnection().query("SELECT username FROM accounts WHERE ID=?",req.accountID, function(error,results,fields){
-	if (error){
-      console.log(error);
-    } else {
-      //console.log(results);
-      console.log(results[0].username);
-      req.username = results[0].username;
-      return next();
-    }
-	})
-}
-
 Handler.getPostContent = function (req,res){
   data = {subsaiddit : req.params.subsaiddit, title : req.params.post_title.replace("_"," ")}
   //console.log(data);
