@@ -12,12 +12,13 @@ ORDER BY total_rating DESC;
 SELECT title as "8.b. posts by testuser's friends", friend, total_rating, text
 FROM (
 	SELECT title, poster, SUM(IFNULL(rating, 0)) as "total_rating", text
-	FROM posts LEFT JOIN post_ratings ON (posts.id = post_ratings.post)
+	FROM posts JOIN post_ratings ON (posts.id = post_ratings.post)
 	GROUP BY title
-) AS ratings JOIN (
+) AS ratings
+JOIN (
 	SELECT account2 AS "friend"
 	FROM friends
-	WHERE account1 < account2 AND account1 = "testuser"
+	WHERE account1 = "testuser"
 ) AS testusers_friends ON (ratings.poster = testusers_friends.friend)
 ORDER BY total_rating DESC;
 
@@ -46,7 +47,7 @@ FROM favourites
 	JOIN (
 		SELECT account2 AS "friend"
 		FROM friends
-		WHERE account1 < account2 AND account1 = "testuser"
+		WHERE account1 = "testuser"
 	) AS testusers_friends ON (favourites.account = friend);
 
 -- 8.f. account A's friend's subscribed subsaiddits (no duplicates)
@@ -54,7 +55,7 @@ SELECT subsaiddit as "8.f. testuser's friends subscribed subsaiddits", friend
 FROM subscriptions JOIN (
 	SELECT account2 AS "friend"
 	FROM friends
-	WHERE account1 < account2 AND account1 = "testuser"
+	WHERE account1 = "testuser"
 ) AS testusers_friends ON (subscriptions.account = friend);
 
 -- 8.g. subsaiddit S's creator's posts
