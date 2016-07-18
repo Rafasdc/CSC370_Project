@@ -23,6 +23,7 @@ module.exports = function(app, express) {
   //router.get('/:subsaiddit/:deletePost',Handler.deletePost);
   router.post('/getSubscribed',Authenticate.ensureLoggedIn, Handler.sendSubscribed);
   router.get('/notAuthorized',Handler.sendNotAuthorized);
+  router.get("/getPost/:subsaiddit/:post_title", Handler.getPostContent);
 
 
   return router;

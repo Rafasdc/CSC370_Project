@@ -103,6 +103,8 @@ INSERT INTO accounts VALUES('testuser','test@test.com','letmein',NOW());
 
 INSERT INTO accounts VALUES('usertwo','two@test.com','password',NOW());
 
+INSERT INTO accounts VALUES(‘default’,’default’,’default’,NOW());
+
 INSERT INTO subsaiddits VALUES('Front',NULL,'This is a test subsaiddit','0','testuser');
 
 INSERT INTO posts VALUES('1','First post','/Front/first_post',NOW(),NULL,'My first post in this subsaiddit','Front','testuser');

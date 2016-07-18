@@ -102,6 +102,31 @@ Handler.getUser = function(req,res,next){
 	})
 }
 
+Handler.getPostContent = function (req,res){
+  data = {subsaiddit : req.params.subsaiddit, title : req.params.post_title.replace("_"," ")}
+  //console.log(data);
+  database.getConnection().query("SELECT id,text,rating FROM posts,post_ratings WHERE (posts.subsaiddit=? and title=?) and (id = post_ratings.post)",[data.subsaiddit,data.title],function(error,results,fields){
+    if (error){
+        console.log(error);
+      } else {
+        console.log(results);
+        if (results.length == 0){
+          database.getConnection().query("SELECT text FROM posts WHERE (posts.subsaiddit=? and title=?)",[data.subsaiddit,data.title],function(error,results){
+            if (error){
+              console.log(error);
+            } else {
+              res.send(results);
+            }
+          })
+        }else {
+          res.send(results);
+        }
+        //console.log(results);
+        
+      }
+  })
+}
+
 
 
 return Handler;
