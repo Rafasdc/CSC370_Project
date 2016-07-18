@@ -4,7 +4,7 @@ $(document).ready(function() {
 		//console.log(data);
 		//console.log(data[0].title);
 		for (var i = 0; i < data.length ; i++){
-			$(".top-posts-list").append("<a href='#'class='list-group-item top-post' id='"+data[i].url+"'><span class='badge'>"+data[i].rating+"</span>"+data[i].title+"</a>");
+			$(".top-posts-list").append("<a href='#'class='list-group-item top-post' id='"+data[i].url+"'><span class='badge'>"+data[i].rating+"</span>"+data[i].title+"</a><button type='button' class='btn btn-danger'>Delete</button>");
 		}
 	}).fail(function(){
 		console.log('error getting posts');
