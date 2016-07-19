@@ -48,7 +48,7 @@ CREATE TABLE comments(
 	parent INTEGER NOT NULL,
 	poster VARCHAR(32) NOT NULL,
 	post INTEGER NOT NULL,
-	FOREIGN KEY (parent) REFERENCES comments(id),
+	FOREIGN KEY (parent) REFERENCES comments(id) ON DELETE CASCADE,
 	FOREIGN KEY (poster) REFERENCES accounts(username),
 	FOREIGN KEY (post) REFERENCES posts(id) ON DELETE CASCADE
 );
@@ -68,7 +68,7 @@ CREATE TABLE favourites(
 	account VARCHAR(32) NOT NULL,
 	post INTEGER NOT NULL,
 	FOREIGN KEY (account) REFERENCES accounts(username),
-	FOREIGN KEY (post) REFERENCES posts(id)
+	FOREIGN KEY (post) REFERENCES posts(id) ON DELETE CASCADE
 );
 
 
