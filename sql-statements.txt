@@ -1,10 +1,9 @@
 
-CREATE USER csc370_admin IDENTIFIED BY 'finalProject';
-GRANT SELECT,INSERT,DELETE,UPDATE ON * TO csc370_admin;
-
-
 CREATE DATABASE csc370_project;
 USE csc370_project;
+
+CREATE USER csc370_admin IDENTIFIED BY 'finalProject';
+GRANT SELECT,INSERT,DELETE,UPDATE ON * TO csc370_admin;
 
 CREATE TABLE accounts (
   	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -105,17 +104,26 @@ INSERT INTO accounts(username,email,password,date_registered) VALUES('testuser',
 
 INSERT INTO accounts(username,email,password,date_registered) VALUES('usertwo','two@test.com','$2a$10$q/pqrThWCV7Kqzp9ASr3AujxXeKarY.YQIaTAjhv1HP1gNlppkoFm',NOW());
 
+INSERT INTO accounts(username,email,password,date_registered) VALUES('frienduser','friend@test.com','$2a$10$q/pqrThWCV7Kqzp9ASr3AujxXeKarY.YQIaTAjhv1HP1gNlppkoFm',NOW());
+
 INSERT INTO subsaiddits VALUES('Front',NULL,'This is a test subsaiddit','0','testuser');
+INSERT INTO subsaiddits VALUES('Another',NULL,'This is a another test subsaiddit','0','frienduser');
 
 INSERT INTO posts VALUES('1','First post','/Front/first_post',NOW(),NULL,'My first post in this subsaiddit','Front','testuser');
 
 INSERT INTO posts(title,url,time_published,time_edited,text,subsaiddit,poster) VALUES('Second post','/Front/second_post',NOW(),NULL,'My second post in this subsaiddit','Front','testuser');
+INSERT INTO posts(title,url,time_published,time_edited,text,subsaiddit,poster) VALUES('A post','/Front/a_post',NOW(),NULL,'My second post in this subsaiddit','Another','usertwo');
+INSERT INTO posts(title,url,time_published,time_edited,text,subsaiddit,poster) VALUES('A post with lots of spaces','/Front/a_post_with_lots_of_spaces',NOW(),NULL,'My second post in this subsaiddit','Another','frienduser');
+INSERT INTO posts(title,url,time_published,time_edited,text,subsaiddit,poster) VALUES('another post','/Front/another_post',NOW(),NULL,'My second post in this subsaiddit\n\n\n\n\n\n\nnow your queries look horrible with lots of newlines','Another','frienduser');
 
 INSERT INTO comments(text,time_posted,parent,poster,post) VALUES('Commenting on myself',NOW(),1,'testuser',1);
 
 INSERT INTO subscriptions VALUES('testuser','Front');
+INSERT INTO subscriptions VALUES('frienduser','Another');
 
 INSERT INTO favourites VALUES('testuser',1);
+INSERT INTO favourites VALUES('frienduser',3);
+INSERT INTO favourites VALUES('frienduser',4);
 
 INSERT INTO comment_ratings VALUES('testuser',1,1);
 
@@ -123,3 +131,5 @@ INSERT INTO post_ratings VALUES('testuser',1,1);
 
 INSERT INTO friends VALUES('testuser','usertwo');
 INSERT INTO friends VALUES('usertwo', 'testuser');
+INSERT INTO friends VALUES('testuser','frienduser');
+INSERT INTO friends VALUES('frienduser', 'testuser');
