@@ -12,7 +12,7 @@ Handler = (function() {
 
 
  Handler.getPost = function(req,res){
-  var title = req.params.post.replace.split("_").join(" ");
+  var title = req.params.post.split("_").join(" ");
   var query = database.getConnection().query("SELECT title,subsaiddit FROM posts WHERE title=? and subsaiddit=?",[title,req.params.subsaiddit],function(error,results){
     if(error){
       console.log(error);
