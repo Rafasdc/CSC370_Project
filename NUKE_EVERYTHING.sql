@@ -1,0 +1,9 @@
+DROP TABLE friends;
+DROP TABLE comment_ratings;
+DROP TABLE post_ratings;
+DROP TABLE subscriptions;
+DROP TABLE favourites;
+DROP TABLE comments;
+DROP TABLE posts;
+DROP TABLE subsaiddits;
+DROP TABLE accounts;
